@@ -1,8 +1,8 @@
-name: Release
+name: Build application
 on:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - 'master'
   workflow_dispatch:
 
 jobs:
@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [macos-latest, ubuntu-20.04, windows-latest]
+        platform: [macos-latest, ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.platform }}
     steps:
       - name: Checkout repository
