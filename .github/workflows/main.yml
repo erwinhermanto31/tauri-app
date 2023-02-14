@@ -21,25 +21,25 @@ jobs:
         with:
           node-version: 16
 
-      - uses: yarn/action-setup@v2.0.1
-        name: Install yarn
-        id: yarn-install
+      - uses: pnpm/action-setup@v2.0.1
+        name: Install pnpm
+        id: pnpm-install
         with:
           version: 7.13.1
           run_install: false
 
-      - name: Get yarn store directory
-        id: yarn-cache
+      - name: Get pnpm store directory
+        id: pnpm-cache
         run: |
-          echo "::set-output name=yarn_cache_dir::$(yarn store path)"
+          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
 
       - uses: actions/cache@v3
-        name: Setup yarn cache
+        name: Setup pnpm cache
         with:
-          path: ${{ steps.yarn-cache.outputs.yarn_cache_dir }}
-          key: ${{ runner.os }}-yarn-store-${{ hashFiles('**/yarn-lock.yaml') }}
+          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-store-
+            ${{ runner.os }}-pnpm-store-
 
       - name: Rust setup
         uses: actions-rs/toolchain@v1
